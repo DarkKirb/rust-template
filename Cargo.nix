@@ -4,7 +4,7 @@
 args@{
   release ? true,
   rootFeatures ? [
-    "discord-bridge/default"
+    "rust-template/default"
   ],
   rustPackages,
   buildRustPackages,
@@ -35,10 +35,10 @@ in
 {
   cargo2nixVersion = "0.10.0";
   workspace = {
-    discord-bridge = rustPackages.unknown.discord-bridge."0.1.0";
+    rust-template = rustPackages.unknown.rust-template."0.1.0";
   };
-  "unknown".discord-bridge."0.1.0" = overridableMkRustCrate (profileName: rec {
-    name = "discord-bridge";
+  "unknown".rust-template."0.1.0" = overridableMkRustCrate (profileName: rec {
+    name = "rust-template";
     version = "0.1.0";
     registry = "unknown";
     src = fetchCrateLocal workspaceSrc;
