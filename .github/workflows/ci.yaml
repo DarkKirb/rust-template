@@ -91,6 +91,17 @@ jobs:
         with:
           command: clippy
           args: -- -D warnings -D clippy::all -D clippy::nursery -D clippy::pedantic -D clippy::cargo -F clippy::default_union_representation -D clippy::expect_used -D clippy::lossy_float_literal -D clippy::panic -F clippy::panic_in_result_fn -D clippy::rc_mutex -D clippy::undocumented_unsafe_blocks -D clippy::unwrap_used
+      - uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: clippy-sarif sarif-fmt
+      - run: cargo clippy --message-format=json | clippy-sarif | tee rust-clippy-results.sarif | sarif-fmt
+        continue-on-error: true
+      - name: Upload analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: rust-clippy-results.sarif
+          wait-for-processing: true
   bloat:
     needs: coverage
     runs-on: ubuntu-latest
