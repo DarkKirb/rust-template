@@ -144,8 +144,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: Maanuj-Vora/List-Contributors@1.0.3
-        with:
-          REPO_NAME: ${{ github.repository }}
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CONTRIBUTOR: "## Contributors"
+      - uses: cjdenio/contributor_list@1.1
