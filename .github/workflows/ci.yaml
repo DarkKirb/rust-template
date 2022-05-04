@@ -143,5 +143,5 @@ jobs:
   update_contributors:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: cjdenio/contributor_list@1.1
+      - uses: actions/checkout@master
+      - uses: docker://cjdenio/contributor_list:latest
