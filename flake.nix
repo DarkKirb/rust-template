@@ -1,5 +1,5 @@
 {
-  description = "discord-matrix-bridge";
+  description = "rust-template";
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs;
@@ -22,7 +22,7 @@
   outputs = { self, nixpkgs, flake-utils, rust-overlay, cargo2nix, ... } @ inputs: flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
     let
       overlays = [
-        cargo2nix.overlay.${system}
+        cargo2nix.overlays.default
         (import rust-overlay)
       ];
       pkgs = import nixpkgs {
@@ -41,8 +41,6 @@
             extensions = [ "rust-src" ];
           })
           cargo2nix.packages.${system}.cargo2nix
-          cargo-fuzz
-          sqlx-cli
         ];
       };
       packages = {
